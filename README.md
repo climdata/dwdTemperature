@@ -75,7 +75,8 @@ for (month in c("02","03","04","05","06","07","08","09","10","11","12")){
 temp <- temp[order(temp$Jahr, temp$Monat),]
 names(temp)[names(temp) == "Jahr"] <- "year"
 names(temp)[names(temp) == "Monat"] <- "month"
-temp$time <- signif(temp$year + (temp$month-0.5)/12, digits=6)
+temp$ts <- signif(temp$year + (temp$month-0.5)/12, digits=6)
+temp$time <- paste(temp$year,temp$month, '15 00:00:00', sep='-')
 temp$X <- NULL
 
 write.table(temp, file = "csv/monthly_temperature_de.csv", append = FALSE, quote = TRUE, sep = ",",
@@ -97,10 +98,14 @@ require("ggplot2")
 ## Loading required package: ggplot2
 ```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.5.3
+```
+
 ```r
 temp <- read.csv("./csv/monthly_temperature_de.csv", sep=",")
 mp <- ggplot() +
-      geom_line(aes(y=temp$Deutschland, x=temp$time), color="blue") +
+      geom_line(aes(y=temp$Deutschland, x=temp$ts), color="blue") +
       xlab("Year") + ylab("Temperature ['C]")
 mp
 ```
