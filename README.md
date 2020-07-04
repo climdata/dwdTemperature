@@ -98,10 +98,6 @@ require("ggplot2")
 ## Loading required package: ggplot2
 ```
 
-```
-## Warning: package 'ggplot2' was built under R version 3.5.3
-```
-
 ```r
 temp <- read.csv("./csv/monthly_temperature_de.csv", sep=",")
 mp <- ggplot() +
